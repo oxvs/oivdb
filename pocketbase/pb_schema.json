@@ -1,0 +1,116 @@
+[
+	{
+		"id": "_pb_users_auth_",
+		"name": "users",
+		"type": "auth",
+		"system": false,
+		"schema": [
+			{
+				"id": "users_name",
+				"name": "name",
+				"type": "text",
+				"system": false,
+				"required": false,
+				"unique": false,
+				"options": {
+					"min": null,
+					"max": null,
+					"pattern": ""
+				}
+			},
+			{
+				"id": "lhlzped3",
+				"name": "avatar_post",
+				"type": "relation",
+				"system": false,
+				"required": false,
+				"unique": false,
+				"options": {
+					"maxSelect": 1,
+					"collectionId": "sdr3oaqa30xcuu3",
+					"cascadeDelete": false
+				}
+			}
+		],
+		"listRule": "id = @request.auth.id",
+		"viewRule": "id = @request.auth.id",
+		"createRule": "",
+		"updateRule": "id = @request.auth.id",
+		"deleteRule": "id = @request.auth.id",
+		"options": {
+			"allowEmailAuth": false,
+			"allowOAuth2Auth": false,
+			"allowUsernameAuth": true,
+			"exceptEmailDomains": null,
+			"manageRule": null,
+			"minPasswordLength": 8,
+			"onlyEmailDomains": null,
+			"requireEmail": false
+		}
+	},
+	{
+		"id": "sdr3oaqa30xcuu3",
+		"name": "posts",
+		"type": "base",
+		"system": false,
+		"schema": [
+			{
+				"id": "27rn1wt8",
+				"name": "media",
+				"type": "file",
+				"system": false,
+				"required": true,
+				"unique": false,
+				"options": {
+					"maxSelect": 1,
+					"maxSize": 100000000,
+					"mimeTypes": [
+						"image/jpg",
+						"image/jpeg",
+						"image/png",
+						"image/svg+xml",
+						"image/gif",
+						"video/mp4",
+						"video/x-ms-wmv",
+						"video/quicktime",
+						"video/3gpp",
+						"video/webm"
+					],
+					"thumbs": ["50x50"]
+				}
+			},
+			{
+				"id": "jyzdrwku",
+				"name": "description",
+				"type": "text",
+				"system": false,
+				"required": false,
+				"unique": false,
+				"options": {
+					"min": null,
+					"max": 200,
+					"pattern": ""
+				}
+			},
+			{
+				"id": "boh4u3qq",
+				"name": "creator",
+				"type": "relation",
+				"system": false,
+				"required": true,
+				"unique": false,
+				"options": {
+					"maxSelect": 1,
+					"collectionId": "_pb_users_auth_",
+					"cascadeDelete": true
+				}
+			}
+		],
+		"listRule": "",
+		"viewRule": "",
+		"createRule": "",
+		"updateRule": "@collection.posts.creator.id = @request.auth.id",
+		"deleteRule": "@collection.posts.creator.id = @request.auth.id",
+		"options": {}
+	}
+]
